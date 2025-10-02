@@ -8,6 +8,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitTask; // WICHTIGER IMPORT
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,6 +18,10 @@ import java.util.concurrent.ConcurrentHashMap;
 public class RoundThing extends JavaPlugin implements Listener {
 
     private int particleLimit;
+    private boolean isFolia = false;
+
+    // KORREKTUR: Die Variable muss vom Typ "Object" sein, um beide Task-Typen zu halten.
+    private Object particleTask = null;
 
     public static class PlayerShapes {
         public final Map<String, ParticleCircle> circles = new HashMap<>();
@@ -27,10 +32,18 @@ public class RoundThing extends JavaPlugin implements Listener {
     private final Map<UUID, PlayerShapes> allPlayerShapes = new ConcurrentHashMap<>();
     private StorageManager storageManager;
     private LocaleManager localeManager;
-    private ScheduledTask particleTask;
 
     @Override
     public void onEnable() {
+        try {
+            Class.forName("io.papermc.paper.threadedregions.scheduler.GlobalRegionScheduler");
+            this.isFolia = true;
+            getLogger().info("Folia-Server erkannt. Nutze den GlobalRegionScheduler.");
+        } catch (ClassNotFoundException e) {
+            this.isFolia = false;
+            getLogger().info("Paper/Spigot-Server erkannt. Nutze den BukkitScheduler.");
+        }
+
         saveDefaultConfig();
         reloadPluginConfig();
 
@@ -45,7 +58,6 @@ public class RoundThing extends JavaPlugin implements Listener {
         getCommand("c").setTabCompleter(new CircleTabCompleter(this, circleCommand));
         getCommand("s").setExecutor(sphereCommand);
         getCommand("s").setTabCompleter(new SphereTabCompleter(this, circleCommand));
-
         getCommand("roundthing").setExecutor(adminCommand);
         getCommand("roundthing").setTabCompleter(new AdminTabCompleter());
 
@@ -55,24 +67,41 @@ public class RoundThing extends JavaPlugin implements Listener {
             loadPlayerData(player.getUniqueId());
         }
 
-        this.particleTask = Bukkit.getGlobalRegionScheduler().runAtFixedRate(this, (task) -> {
+        Runnable particleRunnable = () -> {
             for (PlayerShapes shapes : allPlayerShapes.values()) {
                 for (ParticleCircle circle : shapes.circles.values()) circle.draw();
                 for (ParticleSphere sphere : shapes.spheres.values()) sphere.draw();
             }
-        }, 20L, 10L);
+        };
+
+        if (isFolia) {
+            // KORREKTUR: Der Task wird korrekt der "Object"-Variable zugewiesen.
+            this.particleTask = Bukkit.getGlobalRegionScheduler().runAtFixedRate(this, (task) -> particleRunnable.run(), 20L, 10L);
+        } else {
+            // KORREKTUR: Der Task wird korrekt der "Object"-Variable zugewiesen.
+            this.particleTask = Bukkit.getScheduler().runTaskTimerAsynchronously(this, particleRunnable, 20L, 10L);
+        }
 
         getLogger().info("RoundThing wurde aktiviert.");
     }
 
     @Override
     public void onDisable() {
-        if (this.particleTask != null) this.particleTask.cancel();
+        if (this.particleTask != null) {
+            // KORREKTUR: Wir prüfen den Typ und casten ihn korrekt, um cancel() aufzurufen.
+            if (isFolia && this.particleTask instanceof ScheduledTask) {
+                ((ScheduledTask) this.particleTask).cancel();
+            } else if (!isFolia && this.particleTask instanceof BukkitTask) {
+                ((BukkitTask) this.particleTask).cancel();
+            }
+        }
+
         for (UUID uuid : allPlayerShapes.keySet()) savePlayerData(uuid);
         allPlayerShapes.clear();
         getLogger().info("RoundThing wurde deaktiviert.");
     }
 
+    // --- Der Rest der Klasse ist unverändert ---
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         loadPlayerData(event.getPlayer().getUniqueId());
