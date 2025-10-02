@@ -1,0 +1,59 @@
+# =============================================================
+# = Файл русского языка для плагина RoundThing              =
+# =============================================================
+
+# Общие ошибки
+command_from_console: "&cЭту команду может использовать только игрок."
+invalid_color: "&cНеверный цвет! Пожалуйста, выберите из списка."
+available_colors: "&eДоступно: &f%colors%"
+invalid_number: "&cОшибка ввода. Толщина, координаты и т.д. должны быть числами!"
+rotation_out_of_bounds: "&cОшибка: Углы поворота должны быть в диапазоне от -90 до 90 градусов!"
+
+# Справка
+help_header: "&6========== Справка по Particle Shapes =========="
+help_create_circle: "&b/c create <Имя> <Диаметр> [Опции...]"
+help_create_sphere: "&b/s create <Имя> <Диаметр> [Опции...]"
+help_create_desc: "&7Создает/изменяет фигуру. Используйте TAB для подсказок."
+help_options_circle: "&eОпциональный порядок: &f[Толщина] [x y z] [Цвет] [rotX] [rotZ]"
+help_options_sphere: "&eОпциональный порядок: &f[Толщина] [x y z] [Цвет]"
+help_delete: "&b/c delete <Имя|all> &7(или /s)"
+help_delete_desc: "&7Удаляет одну или все ваши фигуры."
+help_list: "&b/c list &7(или /s)"
+help_list_desc: "&7Показывает все созданные вами фигуры."
+help_help: "&b/c help &7(или /s)"
+help_help_desc: "&7Показывает это справочное сообщение."
+help_footer: "&6========================================"
+
+# Сообщения о кругах
+circle_success: "&aКруг '%name%' успешно создан/обновлен!"
+circle_deleted: "&aКруг '%name%' удален."
+circle_deleted_all: "&aВсе ваши круги удалены."
+circle_not_found: "&cКруг с таким именем не найден!"
+circle_list_header: "&6--- Ваши круги ---"
+circle_list_empty: "&eВы еще не создали ни одного круга."
+
+# Сообщения о сферах
+sphere_success: "&aСфера '%name%' успешно создана/обновлена!"
+sphere_deleted: "&aСфера '%name%' удалена."
+sphere_deleted_all: "&aВсе ваши сферы удалены."
+sphere_not_found: "&cСфера с таким именем не найдена!"
+sphere_list_header: "&6--- Ваши сферы ---"
+sphere_list_empty: "&eВы еще не создали ни одной сферы."
+
+# Сообщения о бюджете
+budget_exceeded: "&cЛимит частиц превышен! Новая фигура (%new%) + текущие (%current%) превысят ваш лимит в %limit%."
+
+# Сообщения для администратора
+admin_no_permission: "&cУ вас нет прав для использования этой команды."
+admin_help_header: "&6--- Справка администратора RoundThing ---"
+admin_help_setlimit: "&b/roundthing setlimit <количество>"
+admin_help_reload: "&b/roundthing reload"
+admin_usage_setlimit: "&cИспользование: /roundthing setlimit <количество>"
+admin_limit_negative: "&cЛимит не может быть отрицательным."
+admin_limit_set: "&aЛимит частиц установлен на %limit%."
+admin_guidelines_header: "&7--- Ориентиры ---"
+admin_guideline_circle: "&7Круг диаметром 50 блоков содержит ~157 частиц."
+admin_guideline_sphere: "&7Сфера диаметром 50 блоков содержит ~4100 частиц."
+admin_guideline_info: "&eЛимит в 10 000 позволяет создать ~2 большие сферы на игрока."
+admin_reload_success: "&aКонфигурация перезагружена. Новый лимит: %limit%"
+admin_unknown_command: "&cНеизвестная команда. Используйте /roundthing для справки."

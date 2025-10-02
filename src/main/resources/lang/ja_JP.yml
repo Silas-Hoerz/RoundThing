@@ -1,0 +1,59 @@
+# =============================================================
+# = RoundThing プラグインの日本語言語ファイル             =
+# =============================================================
+
+# 一般的なエラー
+command_from_console: "&cこのコマンドはプレイヤーのみが実行できます。"
+invalid_color: "&c無効な色です！リストから一つ選んでください。"
+available_colors: "&e利用可能な色: &f%colors%"
+invalid_number: "&c入力エラーです。厚さ、座標などは有効な数字である必要があります！"
+rotation_out_of_bounds: "&cエラー：回転角度は-90度から90度の間でなければなりません！"
+
+# ヘルプメッセージ
+help_header: "&6========== パーティクル形状ヘルプ =========="
+help_create_circle: "&b/c create <名前> <直径> [オプション...]"
+help_create_sphere: "&b/s create <名前> <直径> [オプション...]"
+help_create_desc: "&7形状を作成/変更します。TABキーで候補を表示します。"
+help_options_circle: "&e任意指定の順序: &f[厚さ] [x y z] [色] [rotX] [rotZ]"
+help_options_sphere: "&e任意指定の順序: &f[厚さ] [x y z] [色]"
+help_delete: "&b/c delete <名前|all> &7(または /s)"
+help_delete_desc: "&7あなたの形状を一つまたは全て削除します。"
+help_list: "&b/c list &7(または /s)"
+help_list_desc: "&7作成した全ての形状を表示します。"
+help_help: "&b/c help &7(または /s)"
+help_help_desc: "&7このヘルプメッセージを表示します。"
+help_footer: "&6========================================"
+
+# サークルのメッセージ
+circle_success: "&aサークル「%name%」が正常に作成/更新されました！"
+circle_deleted: "&aサークル「%name%」が削除されました。"
+circle_deleted_all: "&aあなたの全てのサークルが削除されました。"
+circle_not_found: "&cその名前のサークルは見つかりませんでした！"
+circle_list_header: "&6--- あなたのサークル ---"
+circle_list_empty: "&eまだサークルを作成していません。"
+
+# スフィアのメッセージ
+sphere_success: "&aスフィア「%name%」が正常に作成/更新されました！"
+sphere_deleted: "&aスフィア「%name%」が削除されました。"
+sphere_deleted_all: "&aあなたの全てのスフィアが削除されました。"
+sphere_not_found: "&cその名前のスフィアは見つかりませんでした！"
+sphere_list_header: "&6--- あなたのスフィア ---"
+sphere_list_empty: "&eまだスフィアを作成していません。"
+
+# 予算のメッセージ
+budget_exceeded: "&cパーティクルの上限を超えました！新しい形状 (%new%) + 現在の数 (%current%) が上限の %limit% を超えてしまいます。"
+
+# 管理者コマンドのメッセージ
+admin_no_permission: "&cこのコマンドを使用する権限がありません。"
+admin_help_header: "&6--- RoundThing 管理者ヘルプ ---"
+admin_help_setlimit: "&b/roundthing setlimit <数値>"
+admin_help_reload: "&b/roundthing reload"
+admin_usage_setlimit: "&c使用法: /roundthing setlimit <数値>"
+admin_limit_negative: "&c上限を負の数にすることはできません。"
+admin_limit_set: "&aパーティクルの上限が %limit% に設定されました。"
+admin_guidelines_header: "&7--- 目安 ---"
+admin_guideline_circle: "&7直径50ブロックのサークルには約157個のパーティクルがあります。"
+admin_guideline_sphere: "&7直径50ブロックのスフィアには約4100個のパーティクルがあります。"
+admin_guideline_info: "&e上限10,000で、プレイヤー1人あたり大きなスフィアを約2個作成できます。"
+admin_reload_success: "&a設定がリロードされました。新しい上限: %limit%"
+admin_unknown_command: "&c不明なコマンドです。/roundthing でヘルプを表示してください。"

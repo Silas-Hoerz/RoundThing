@@ -1,0 +1,59 @@
+# =============================================================
+# = Archivo de idioma español para el plugin RoundThing      =
+# =============================================================
+
+# Errores Generales
+command_from_console: "&cEste comando solo puede ser ejecutado por un jugador."
+invalid_color: "&c¡Color inválido! Por favor, elige uno de la lista."
+available_colors: "&eDisponibles: &f%colors%"
+invalid_number: "&cError en la entrada. ¡El grosor, las coordenadas, etc., deben ser números válidos!"
+rotation_out_of_bounds: "&cError: ¡Los ángulos de rotación deben estar entre -90 y 90 grados!"
+
+# Mensaje de Ayuda
+help_header: "&6========== Ayuda de Particle Shapes =========="
+help_create_circle: "&b/c create <Nombre> <Diámetro> [Opciones...]"
+help_create_sphere: "&b/s create <Nombre> <Diámetro> [Opciones...]"
+help_create_desc: "&7Crea/modifica una forma. Usa TAB para sugerencias."
+help_options_circle: "&eOrden opcional: &f[Grosor] [x y z] [Color] [rotX] [rotZ]"
+help_options_sphere: "&eOrden opcional: &f[Grosor] [x y z] [Color]"
+help_delete: "&b/c delete <Nombre|all> &7(o /s)"
+help_delete_desc: "&7Elimina una o todas tus formas."
+help_list: "&b/c list &7(o /s)"
+help_list_desc: "&7Muestra todas las formas que has creado."
+help_help: "&b/c help &7(o /s)"
+help_help_desc: "&7Muestra este mensaje de ayuda."
+help_footer: "&6========================================"
+
+# Mensajes de Círculo
+circle_success: "&a¡El círculo '%name%' se creó/actualizó correctamente!"
+circle_deleted: "&aEl círculo '%name%' ha sido eliminado."
+circle_deleted_all: "&aTodos tus círculos han sido eliminados."
+circle_not_found: "&c¡No se encontró ningún círculo con ese nombre!"
+circle_list_header: "&6--- Tus Círculos ---"
+circle_list_empty: "&eAún no has creado ningún círculo."
+
+# Mensajes de Esfera
+sphere_success: "&a¡La esfera '%name%' se creó/actualizó correctamente!"
+sphere_deleted: "&aLa esfera '%name%' ha sido eliminada."
+sphere_deleted_all: "&aTodas tus esferas han sido eliminadas."
+sphere_not_found: "&c¡No se encontró ninguna esfera con ese nombre!"
+sphere_list_header: "&6--- Tus Esferas ---"
+sphere_list_empty: "&eAún no has creado ninguna esfera."
+
+# Mensaje de Presupuesto
+budget_exceeded: "&c¡Límite de partículas excedido! La nueva forma (%new%) + las actuales (%current%) superarían tu límite de %limit%."
+
+# Mensajes de Comando de Admin
+admin_no_permission: "&cNo tienes permiso para usar este comando."
+admin_help_header: "&6--- Ayuda de Admin de RoundThing ---"
+admin_help_setlimit: "&b/roundthing setlimit <cantidad>"
+admin_help_reload: "&b/roundthing reload"
+admin_usage_setlimit: "&cUso: /roundthing setlimit <cantidad>"
+admin_limit_negative: "&cEl límite no puede ser negativo."
+admin_limit_set: "&aEl límite de partículas se ha establecido en %limit%."
+admin_guidelines_header: "&7--- Guía de referencia ---"
+admin_guideline_circle: "&7Un círculo de 50 bloques de diámetro tiene ~157 partículas."
+admin_guideline_sphere: "&7Una esfera de 50 bloques de diámetro tiene ~4100 partículas."
+admin_guideline_info: "&eUn límite de 10,000 permite ~2 esferas grandes por jugador."
+admin_reload_success: "&aConfiguración recargada. Nuevo límite: %limit%"
+admin_unknown_command: "&cComando desconocido. Usa /roundthing para obtener ayuda."

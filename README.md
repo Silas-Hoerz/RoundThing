@@ -1,7 +1,7 @@
 # RoundThing
 
 ![Java](https://img.shields.io/badge/Java-17-blue)
-![Spigot-API](https://img.shields.io/badge/API-1.20%2B-orange)
+![API](https://img.shields.io/badge/API-Paper%20/%20Folia%201.20%2B-orange)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
 **Never build ugly circles again! RoundThing is a Minecraft (Paper/Folia) plugin that visualizes perfect, block-snapped circles, spheres, and rings with particles as the ultimate building guide.**
@@ -21,7 +21,7 @@ This plugin is your personal architect for all circular construction projects. I
 - **Persistent Storage:** Every shape created by a player is saved and survives a server restart.
 - **Server Protection:** A configurable per-player particle limit prevents the server from being overloaded by too many particles.
 - **Fully Configurable:** Admins can adjust the limit at any time in-game or in the `config.yml`.
-- **Multilingual (i18n):** All messages automatically adapt to the player's client language (DE & EN are included by default).
+- **Multilingual (i18n):** Automatically adapts to the player's client language. (Supports English, German, Spanish, French, Chinese, Russian, and many more out of the box).
 - **Intelligent Commands:** Thanks to tab-completion, commands, shape names, colors, and coordinates are suggested as you type.
 
 ---
@@ -85,10 +85,10 @@ The plugin is now ready to use!
 
 ## 🔐 Permissions
 
-| Permission            | Description                                  | Default  |
-|-----------------------|----------------------------------------------|----------|
-| `roundthing.use`      | Allows the use of circle commands (`/c`).    | `true`   |
-| `roundthing.sphere.use` | Allows the use of sphere commands (`/s`).    | `true`   |
+| Permission              | Description                                      | Default  |
+|-------------------------|--------------------------------------------------|----------|
+| `roundthing.circle.use` | Allows the use of circle commands (`/c`).        | `true`   |
+| `roundthing.sphere.use` | Allows the use of sphere commands (`/s`).        | `true`   |
 | `roundthing.admin`      | Allows the use of admin commands (`/roundthing`). | `op`     |
 
 ---

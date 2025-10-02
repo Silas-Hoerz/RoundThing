@@ -1,0 +1,59 @@
+# =============================================================
+# = RoundThing 플러그인을 위한 한국어 언어 파일              =
+# =============================================================
+
+# 일반 오류
+command_from_console: "&c이 명령어는 플레이어만 실행할 수 있습니다."
+invalid_color: "&c잘못된 색상입니다! 목록에서 선택해주세요."
+available_colors: "&e사용 가능한 색상: &f%colors%"
+invalid_number: "&c입력 오류. 두께, 좌표 등은 유효한 숫자여야 합니다!"
+rotation_out_of_bounds: "&c오류: 회전 각도는 -90도에서 90도 사이여야 합니다!"
+
+# 도움말 메시지
+help_header: "&6========== 파티클 모양 도움말 =========="
+help_create_circle: "&b/c create <이름> <지름> [옵션...]"
+help_create_sphere: "&b/s create <이름> <지름> [옵션...]"
+help_create_desc: "&7모양을 생성/수정합니다. TAB 키를 눌러 제안을 확인하세요."
+help_options_circle: "&e선택적 순서: &f[두께] [x y z] [색상] [rotX] [rotZ]"
+help_options_sphere: "&e선택적 순서: &f[두께] [x y z] [색상]"
+help_delete: "&b/c delete <이름|all> &7(또는 /s)"
+help_delete_desc: "&7당신의 모양 중 하나 또는 전부를 삭제합니다."
+help_list: "&b/c list &7(또는 /s)"
+help_list_desc: "&7당신이 생성한 모든 모양을 보여줍니다."
+help_help: "&b/c help &7(또는 /s)"
+help_help_desc: "&7이 도움말 메시지를 표시합니다."
+help_footer: "&6========================================"
+
+# 원 메시지
+circle_success: "&a원 '%name%'이(가) 성공적으로 생성/업데이트되었습니다!"
+circle_deleted: "&a원 '%name%'이(가) 삭제되었습니다."
+circle_deleted_all: "&a당신의 모든 원이 삭제되었습니다."
+circle_not_found: "&c해당 이름의 원을 찾을 수 없습니다!"
+circle_list_header: "&6--- 당신의 원 ---"
+circle_list_empty: "&e아직 원을 생성하지 않았습니다."
+
+# 구 메시지
+sphere_success: "&a구 '%name%'이(가) 성공적으로 생성/업데이트되었습니다!"
+sphere_deleted: "&a구 '%name%'이(가) 삭제되었습니다."
+sphere_deleted_all: "&a당신의 모든 구가 삭제되었습니다."
+sphere_not_found: "&c해당 이름의 구를 찾을 수 없습니다!"
+sphere_list_header: "&6--- 당신의 구 ---"
+sphere_list_empty: "&e아직 구를 생성하지 않았습니다."
+
+# 예산 메시지
+budget_exceeded: "&c파티클 한도를 초과했습니다! 새 모양 (%new%) + 현재 모양 (%current%)이(가) 한도인 %limit%를 초과합니다."
+
+# 관리자 명령어 메시지
+admin_no_permission: "&c이 명령어를 사용할 권한이 없습니다."
+admin_help_header: "&6--- RoundThing 관리자 도움말 ---"
+admin_help_setlimit: "&b/roundthing setlimit <수량>"
+admin_help_reload: "&b/roundthing reload"
+admin_usage_setlimit: "&c사용법: /roundthing setlimit <수량>"
+admin_limit_negative: "&c한도는 음수일 수 없습니다."
+admin_limit_set: "&a파티클 한도가 %limit%(으)로 설정되었습니다."
+admin_guidelines_header: "&7--- 참고 수치 ---"
+admin_guideline_circle: "&7지름 50블록의 원은 약 157개의 파티클을 가집니다."
+admin_guideline_sphere: "&7지름 50블록의 구는 약 4100개의 파티클을 가집니다."
+admin_guideline_info: "&e한도 10,000은 플레이어당 약 2개의 큰 구를 허용합니다."
+admin_reload_success: "&a설정을 다시 불러왔습니다. 새 한도: %limit%"
+admin_unknown_command: "&c알 수 없는 명령어입니다. 도움말을 보려면 /roundthing을 사용하세요."

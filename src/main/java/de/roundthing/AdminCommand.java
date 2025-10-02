@@ -1,3 +1,11 @@
+/**
+ * Handles administrative commands for the RoundThing plugin, such as setting the particle limit
+ * and reloading the configuration. Access is restricted to operators or players with the
+ * 'roundthing.admin' permission.
+ *
+ * @author Silas Hörz
+ * @version 1.0
+ */
 package de.roundthing;
 
 import org.bukkit.command.Command;
@@ -69,12 +77,11 @@ public class AdminCommand implements CommandExecutor {
         return true;
     }
 
-    // Kleine Hilfsmethode, um Nachrichten an Spieler und Konsole zu senden
     private void sendMessage(CommandSender sender, String key, String... replacements) {
         if (sender instanceof Player) {
             localeManager.sendMessage((Player) sender, key, replacements);
         } else {
-            // Die Konsole hat keine Sprache, also senden wir standardmäßig Englisch
+            // The console has no locale, so we default to English.
             String message = localeManager.getMessage("en_US", key);
             for (int i = 0; i < replacements.length; i += 2) {
                 if (i + 1 < replacements.length) {

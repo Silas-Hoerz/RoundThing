@@ -1,0 +1,59 @@
+# =============================================================
+# = RoundThing 插件的简体中文语言文件                      =
+# =============================================================
+
+# 通用错误
+command_from_console: "&c该指令只能由玩家执行。"
+invalid_color: "&c无效的颜色！请从列表中选择一个。"
+available_colors: "&e可用颜色: &f%colors%"
+invalid_number: "&c输入错误。厚度、坐标等必须是有效的数字！"
+rotation_out_of_bounds: "&c错误：旋转角度必须在-90到90度之间！"
+
+# 帮助信息
+help_header: "&6========== 粒子形状帮助 =========="
+help_create_circle: "&b/c create <名称> <直径> [选项...]"
+help_create_sphere: "&b/s create <名称> <直径> [选项...]"
+help_create_desc: "&7创建/修改一个形状。使用 TAB 键获取建议。"
+help_options_circle: "&e可选顺序: &f[厚度] [x y z] [颜色] [rotX] [rotZ]"
+help_options_sphere: "&e可选顺序: &f[厚度] [x y z] [颜色]"
+help_delete: "&b/c delete <名称|all> &7(或 /s)"
+help_delete_desc: "&7删除您的一个或所有形状。"
+help_list: "&b/c list &7(或 /s)"
+help_list_desc: "&7显示您创建的所有形状。"
+help_help: "&b/c help &7(或 /s)"
+help_help_desc: "&7显示此帮助信息。"
+help_footer: "&6========================================"
+
+# 圆形信息
+circle_success: "&a圆形 '%name%' 已成功创建/更新！"
+circle_deleted: "&a圆形 '%name%' 已被删除。"
+circle_deleted_all: "&a您所有的圆形都已被删除。"
+circle_not_found: "&c未找到名为 '%name%' 的圆形！"
+circle_list_header: "&6--- 您的圆形 ---"
+circle_list_empty: "&e您还没有创建任何圆形。"
+
+# 球体信息
+sphere_success: "&a球体 '%name%' 已成功创建/更新！"
+sphere_deleted: "&a球体 '%name%' 已被删除。"
+sphere_deleted_all: "&a您所有的球体都已被删除。"
+sphere_not_found: "&c未找到名为 '%name%' 的球体！"
+sphere_list_header: "&6--- 您的球体 ---"
+sphere_list_empty: "&e您还没有创建任何球体。"
+
+# 预算信息
+budget_exceeded: "&c粒子预算超出！新形状 (%new%) + 当前数量 (%current%) 将超过您的预算上限 %limit%。"
+
+# 管理员指令信息
+admin_no_permission: "&c您没有权限使用此指令。"
+admin_help_header: "&6--- RoundThing 管理员帮助 ---"
+admin_help_setlimit: "&b/roundthing setlimit <数量>"
+admin_help_reload: "&b/roundthing reload"
+admin_usage_setlimit: "&c用法: /roundthing setlimit <数量>"
+admin_limit_negative: "&c预算不能为负数。"
+admin_limit_set: "&a粒子预算上限已设置为 %limit%。"
+admin_guidelines_header: "&7--- 参考值 ---"
+admin_guideline_circle: "&7一个直径50格的圆形约有157个粒子。"
+admin_guideline_sphere: "&7一个直径50格的球体约有4100个粒子。"
+admin_guideline_info: "&e10,000的预算上限大约允许每位玩家创建2个大球体。"
+admin_reload_success: "&a配置已重载。新预算上限: %limit%"
+admin_unknown_command: "&c未知指令。使用 /roundthing 获取帮助。"

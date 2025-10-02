@@ -1,3 +1,10 @@
+/**
+ * Handles player commands related to creating, deleting, and managing particle circles.
+ * It processes the '/c' or '/circle' command and its sub-commands.
+ *
+ * @author Silas Hörz
+ * @version 1.0
+ */
 package de.roundthing;
 
 import org.bukkit.ChatColor;
@@ -13,7 +20,6 @@ import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 public class CircleCommand implements CommandExecutor {
 
@@ -38,13 +44,6 @@ public class CircleCommand implements CommandExecutor {
                 }
             }
         }
-        colorMap.put("rot", Color.RED);
-        colorMap.put("grün", Color.GREEN);
-        colorMap.put("blau", Color.BLUE);
-        colorMap.put("gelb", Color.YELLOW);
-        colorMap.put("lila", Color.PURPLE);
-        colorMap.put("weiss", Color.WHITE);
-        colorMap.put("weiß", Color.WHITE);
     }
 
     public Map<String, Color> getColorMap() {
@@ -59,47 +58,47 @@ public class CircleCommand implements CommandExecutor {
         }
         Player player = (Player) sender;
         if (args.length == 0) {
-            sendeHilfe(player);
+            sendHelpMessage(player);
             return true;
         }
 
         switch (args[0].toLowerCase()) {
             case "create": handleCreate(player, args); break;
             case "delete": handleDelete(player, args); break;
-            case "list": handleList(player); break;
-            case "help": default: sendeHilfe(player); break;
+            case "list": handleList(player, args); break;
+            case "help": default: sendHelpMessage(player); break;
         }
         return true;
     }
 
     private void handleCreate(Player player, String[] args) {
         if (args.length < 3) {
-            sendeHilfe(player);
+            sendHelpMessage(player);
             return;
         }
         try {
             String name = args[1];
-            double durchmesser = Double.parseDouble(args[2]);
+            double diameter = Double.parseDouble(args[2]);
             UUID uuid = player.getUniqueId();
-            Location mittelpunkt = player.getLocation();
-            int dicke = 1;
-            Color farbe = Color.LIME;
+            Location center = player.getLocation();
+            int thickness = 1;
+            Color color = Color.LIME;
             double rotX = 0.0, rotZ = 0.0;
             int currentIndex = 3;
 
             if (args.length > currentIndex && isNumeric(args[currentIndex])) {
-                dicke = Integer.parseInt(args[currentIndex++]);
+                thickness = Integer.parseInt(args[currentIndex++]);
             }
             if (args.length > currentIndex + 2 && isNumeric(args[currentIndex]) && isNumeric(args[currentIndex + 1]) && isNumeric(args[currentIndex + 2])) {
-                mittelpunkt = new Location(player.getWorld(), Double.parseDouble(args[currentIndex]), Double.parseDouble(args[currentIndex + 1]), Double.parseDouble(args[currentIndex + 2]));
+                center = new Location(player.getWorld(), Double.parseDouble(args[currentIndex]), Double.parseDouble(args[currentIndex + 1]), Double.parseDouble(args[currentIndex + 2]));
                 currentIndex += 3;
             }
             if (args.length > currentIndex && !isNumeric(args[currentIndex])) {
-                farbe = parseFarbe(args[currentIndex++]);
-                if (farbe == null) {
+                color = parseColor(args[currentIndex++]);
+                if (color == null) {
                     localeManager.sendMessage(player, "invalid_color");
-                    String farbenListe = String.join(", ", colorMap.keySet());
-                    localeManager.sendMessage(player, "available_colors", "%colors%", farbenListe);
+                    String availableColors = String.join(", ", colorMap.keySet());
+                    localeManager.sendMessage(player, "available_colors", "%colors%", availableColors);
                     return;
                 }
             }
@@ -110,28 +109,27 @@ public class CircleCommand implements CommandExecutor {
                 return;
             }
 
-            // --- PARTIKEL BUDGET PRÜFUNG ---
-            ParticleCircle testKreis = new ParticleCircle(mittelpunkt, durchmesser, dicke, farbe, rotX, rotZ);
-            int neuePartikel = testKreis.getParticleCount();
+            // Particle Budget Check
+            ParticleCircle testCircle = new ParticleCircle(center, diameter, thickness, color, rotX, rotZ);
+            int newParticleCount = testCircle.getParticleCount();
             RoundThing.PlayerShapes playerShapes = plugin.getPlayerShapes(uuid);
 
-            int altePartikel = 0;
+            int oldParticleCount = 0;
             if (playerShapes.circles.containsKey(name)) {
-                altePartikel = playerShapes.circles.get(name).getParticleCount();
+                oldParticleCount = playerShapes.circles.get(name).getParticleCount();
             }
 
-            if (playerShapes.currentParticleCount - altePartikel + neuePartikel > plugin.getParticleLimit()) {
+            if (playerShapes.currentParticleCount - oldParticleCount + newParticleCount > plugin.getParticleLimit()) {
                 localeManager.sendMessage(player, "budget_exceeded",
-                        "%new%", String.valueOf(neuePartikel),
-                        "%current%", String.valueOf(playerShapes.currentParticleCount - altePartikel),
+                        "%new%", String.valueOf(newParticleCount),
+                        "%current%", String.valueOf(playerShapes.currentParticleCount - oldParticleCount),
                         "%limit%", String.valueOf(plugin.getParticleLimit())
                 );
                 return;
             }
 
-            // Alles gut -> Kreis speichern und Budget aktualisieren
-            playerShapes.circles.put(name, testKreis);
-            playerShapes.currentParticleCount = playerShapes.currentParticleCount - altePartikel + neuePartikel;
+            playerShapes.circles.put(name, testCircle);
+            playerShapes.currentParticleCount = playerShapes.currentParticleCount - oldParticleCount + newParticleCount;
             plugin.savePlayerData(uuid);
             localeManager.sendMessage(player, "circle_success", "%name%", name);
 
@@ -142,7 +140,7 @@ public class CircleCommand implements CommandExecutor {
 
     private void handleDelete(Player player, String[] args) {
         if (args.length != 2) {
-            sendeHilfe(player);
+            sendHelpMessage(player);
             return;
         }
         UUID uuid = player.getUniqueId();
@@ -171,7 +169,7 @@ public class CircleCommand implements CommandExecutor {
         plugin.savePlayerData(uuid);
     }
 
-    private void handleList(Player player) {
+    private void handleList(Player player, String[] args) {
         Map<String, ParticleCircle> playerCircles = plugin.getPlayerCircles(player.getUniqueId());
         if (playerCircles.isEmpty()) {
             localeManager.sendMessage(player, "circle_list_empty");
@@ -183,7 +181,7 @@ public class CircleCommand implements CommandExecutor {
         }
     }
 
-    private void sendeHilfe(Player player) {
+    private void sendHelpMessage(Player player) {
         localeManager.sendMessage(player, "help_header");
         localeManager.sendMessage(player, "help_create_circle");
         localeManager.sendMessage(player, "help_create_desc");
@@ -197,8 +195,8 @@ public class CircleCommand implements CommandExecutor {
         localeManager.sendMessage(player, "help_footer");
     }
 
-    public Color parseFarbe(String farbName) {
-        return colorMap.get(farbName.toLowerCase());
+    public Color parseColor(String colorName) {
+        return colorMap.get(colorName.toLowerCase());
     }
 
     private boolean isNumeric(String str) {

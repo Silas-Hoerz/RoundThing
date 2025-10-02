@@ -1,6 +1,12 @@
+/**
+ * Provides context-aware tab-completion for the /circle command. It suggests sub-commands,
+ * existing circle names for deletion, colors, coordinates, and other parameters.
+ *
+ * @author Silas Hörz
+ * @version 1.0
+ */
 package de.roundthing;
 
-import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
@@ -31,19 +37,20 @@ public class CircleTabCompleter implements TabCompleter {
         if (!(sender instanceof Player)) {
             return Collections.emptyList();
         }
-        Player player = (Player) sender;
-        List<String> completions = new ArrayList<>();
-        String currentArg = args[args.length - 1];
 
-        // 1. Vorschläge für den Hauptbefehl (create, delete, etc.)
+        final Player player = (Player) sender;
+        final List<String> completions = new ArrayList<>();
+        final String currentArg = args[args.length - 1];
+
+        // Suggestions for the main sub-command (create, delete, etc.)
         if (args.length == 1) {
             StringUtil.copyPartialMatches(currentArg, SUB_COMMANDS, completions);
         }
-        // 2. Vorschläge für den /c create Befehl
+        // Suggestions for the /c create command
         else if (args[0].equalsIgnoreCase("create")) {
             handleCreateSuggestions(player, args, completions);
         }
-        // 3. Vorschläge für den /c delete Befehl
+        // Suggestions for the /c delete command
         else if (args.length == 2 && args[0].equalsIgnoreCase("delete")) {
             List<String> circleNames = new ArrayList<>(plugin.getPlayerCircles(player.getUniqueId()).keySet());
             circleNames.add("all");
@@ -55,33 +62,33 @@ public class CircleTabCompleter implements TabCompleter {
     }
 
     private void handleCreateSuggestions(Player player, String[] args, List<String> completions) {
-        String currentArg = args[args.length - 1];
-        int argIndex = args.length - 1; // 0-basierter Index des aktuellen Arguments
+        final String currentArg = args[args.length - 1];
+        final int argIndex = args.length - 1; // 0-based index of the current argument
 
-        // args[0] ist "create", args[1] ist der Name, args[2] ist der Durchmesser
+        // Command structure: /c create <name> <diameter> [thickness] [x y z] [color] [rotX] [rotZ]
         switch (argIndex) {
-            case 2: // Spieler tippt den Durchmesser
+            case 2: // Player is typing the diameter
                 StringUtil.copyPartialMatches(currentArg, DIAMETER_SUGGESTIONS, completions);
                 break;
-            case 3: // Spieler tippt die Dicke
+            case 3: // Player is typing the thickness
                 StringUtil.copyPartialMatches(currentArg, THICKNESS_SUGGESTIONS, completions);
                 break;
-            case 4: // Spieler tippt Koordinate X
+            case 4: // Player is typing the X coordinate
                 completions.add(String.valueOf(player.getLocation().getBlockX()));
                 break;
-            case 5: // Spieler tippt Koordinate Y
+            case 5: // Player is typing the Y coordinate
                 completions.add(String.valueOf(player.getLocation().getBlockY()));
                 break;
-            case 6: // Spieler tippt Koordinate Z
+            case 6: // Player is typing the Z coordinate
                 completions.add(String.valueOf(player.getLocation().getBlockZ()));
                 break;
-            case 7: // Spieler tippt die Farbe
+            case 7: // Player is typing the color
                 StringUtil.copyPartialMatches(currentArg, circleCommand.getColorMap().keySet(), completions);
                 break;
-            case 8: // Spieler tippt Rotation X
+            case 8: // Player is typing the X rotation
                 StringUtil.copyPartialMatches(currentArg, ROTATION_SUGGESTIONS, completions);
                 break;
-            case 9: // Spieler tippt Rotation Z
+            case 9: // Player is typing the Z rotation
                 StringUtil.copyPartialMatches(currentArg, ROTATION_SUGGESTIONS, completions);
                 break;
         }

@@ -1,0 +1,59 @@
+# =============================================================
+# = Plik języka polskiego dla wtyczki RoundThing            =
+# =============================================================
+
+# Główne błędy
+command_from_console: "&cTa komenda może być użyta tylko przez gracza."
+invalid_color: "&cNieprawidłowy kolor! Proszę wybrać z listy."
+available_colors: "&eDostępne: &f%colors%"
+invalid_number: "&cBłąd w danych wejściowych. Grubość, współrzędne itp. muszą być prawidłowymi liczbami!"
+rotation_out_of_bounds: "&cBłąd: Kąty obrotu muszą mieścić się w zakresie od -90 do 90 stopni!"
+
+# Wiadomość pomocy
+help_header: "&6========== Pomoc Particle Shapes =========="
+help_create_circle: "&b/c create <Nazwa> <Średnica> [Opcje...]"
+help_create_sphere: "&b/s create <Nazwa> <Średnica> [Opcje...]"
+help_create_desc: "&7Tworzy/modyfikuje kształt. Użyj TAB, aby uzyskać sugestie."
+help_options_circle: "&eOpcjonalna kolejność: &f[Grubość] [x y z] [Kolor] [rotX] [rotZ]"
+help_options_sphere: "&eOpcjonalna kolejność: &f[Grubość] [x y z] [Kolor]"
+help_delete: "&b/c delete <Nazwa|all> &7(lub /s)"
+help_delete_desc: "&7Usuwa jeden lub wszystkie twoje kształty."
+help_list: "&b/c list &7(lub /s)"
+help_list_desc: "&7Pokazuje wszystkie utworzone przez ciebie kształty."
+help_help: "&b/c help &7(lub /s)"
+help_help_desc: "&7Wyświetla tę wiadomość pomocy."
+help_footer: "&6========================================"
+
+# Wiadomości o okręgach
+circle_success: "&aOkrąg '%name%' został pomyślnie utworzony/zaktualizowany!"
+circle_deleted: "&aOkrąg '%name%' został usunięty."
+circle_deleted_all: "&aWszystkie twoje okręgi zostały usunięte."
+circle_not_found: "&cNie znaleziono okręgu o tej nazwie!"
+circle_list_header: "&6--- Twoje Okręgi ---"
+circle_list_empty: "&eNie utworzyłeś jeszcze żadnych okręgów."
+
+# Wiadomości o sferach
+sphere_success: "&aSfera '%name%' została pomyślnie utworzona/zaktualizowana!"
+sphere_deleted: "&aSfera '%name%' została usunięta."
+sphere_deleted_all: "&aWszystkie twoje sfery zostały usunięte."
+sphere_not_found: "&cNie znaleziono sfery o tej nazwie!"
+sphere_list_header: "&6--- Twoje Sfery ---"
+sphere_list_empty: "&eNie utworzyłeś jeszcze żadnych sfer."
+
+# Wiadomość o budżecie
+budget_exceeded: "&cPrzekroczono limit cząsteczek! Nowy kształt (%new%) + obecne (%current%) przekroczyłby twój limit %limit%."
+
+# Wiadomości komendy administratora
+admin_no_permission: "&cNie masz uprawnień do użycia tej komendy."
+admin_help_header: "&6--- Pomoc Administratora RoundThing ---"
+admin_help_setlimit: "&b/roundthing setlimit <ilość>"
+admin_help_reload: "&b/roundthing reload"
+admin_usage_setlimit: "&cUżycie: /roundthing setlimit <ilość>"
+admin_limit_negative: "&cLimit nie może być ujemny."
+admin_limit_set: "&aLimit cząsteczek został ustawiony na %limit%."
+admin_guidelines_header: "&7--- Wskazówki ---"
+admin_guideline_circle: "&7Okrąg o średnicy 50 bloków ma ~157 cząsteczek."
+admin_guideline_sphere: "&7Sfera o średnicy 50 bloków ma ~4100 cząsteczek."
+admin_guideline_info: "&eLimit 10 000 pozwala na stworzenie ~2 dużych sfer na gracza."
+admin_reload_success: "&aKonfiguracja została przeładowana. Nowy limit: %limit%"
+admin_unknown_command: "&cNieznana komenda. Użyj /roundthing, aby uzyskać pomoc."

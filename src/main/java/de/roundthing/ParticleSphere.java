@@ -1,3 +1,11 @@
+/**
+ * Represents a single particle sphere. This class holds all properties of a sphere,
+ * such as its position and size, and contains the logic for rendering it
+ * and calculating its particle count.
+ *
+ * @author Silas Hörz
+ * @version 1.0
+ */
 package de.roundthing;
 
 import org.bukkit.Color;
@@ -26,6 +34,9 @@ public class ParticleSphere {
         this.dustOptions = new Particle.DustOptions(color, 1.5f);
     }
 
+    /**
+     * Draws the sphere in the world by spawning particles.
+     */
     public void draw() {
         double radius = this.diameter / 2.0;
         int scanRadius = (int) Math.ceil(radius);
@@ -34,11 +45,11 @@ public class ParticleSphere {
         Location centerBlockLocation = new Location(world, Math.floor(centerX) + 0.5, Math.floor(centerY) + 0.5, Math.floor(centerZ) + 0.5);
         world.spawnParticle(Particle.DUST, centerBlockLocation, 1, 0, 0, 0, 0, dustOptions);
 
-        // Wir scannen jetzt einen Würfel (3D)
+        // Scan a 3D cube surrounding the sphere's center
         for (int x = -scanRadius; x <= scanRadius; x++) {
             for (int y = -scanRadius; y <= scanRadius; y++) {
                 for (int z = -scanRadius; z <= scanRadius; z++) {
-                    if (isVoxelAtEdgeOfSphere(x, y, z, radius, thickness)) {
+                    if (isVoxelOnShell(x, y, z, radius, thickness)) {
                         Location particleLoc = new Location(
                                 world,
                                 Math.floor(this.centerX) + x,
@@ -56,30 +67,19 @@ public class ParticleSphere {
         }
     }
 
-    private boolean isVoxelAtEdgeOfSphere(int x, int y, int z, double radius, int thickness) {
-        // 3D-Distanzberechnung
-        double distanceSquared = x * x + y * y + z * z;
-        double radiusSquared = radius * radius;
-
-        if (thickness >= radius) { // Gefüllte Kugel
-            return distanceSquared <= radiusSquared;
-        } else { // Hohle Kugel (Sphäre)
-            double innerRadius = radius - thickness;
-            double innerRadiusSquared = innerRadius * innerRadius;
-            return distanceSquared <= radiusSquared && distanceSquared >= innerRadiusSquared;
-        }
-    }
+    /**
+     * Calculates the total number of unique particles this sphere will generate.
+     * @return The total particle count.
+     */
     public int getParticleCount() {
-        // Zählt den Mittelpunkt-Partikel
-        int count = 1;
-
+        int count = 1; // Start with 1 for the center particle
         double radius = this.diameter / 2.0;
         int scanRadius = (int) Math.ceil(radius);
 
         for (int x = -scanRadius; x <= scanRadius; x++) {
             for (int y = -scanRadius; y <= scanRadius; y++) {
                 for (int z = -scanRadius; z <= scanRadius; z++) {
-                    if (isVoxelAtEdgeOfSphere(x, y, z, radius, thickness)) {
+                    if (isVoxelOnShell(x, y, z, radius, thickness)) {
                         count++;
                     }
                 }
@@ -88,8 +88,25 @@ public class ParticleSphere {
         return count;
     }
 
+    /**
+     * Checks if a 3D voxel offset lies on the shell of the sphere.
+     * @return True if the voxel is part of the shape, false otherwise.
+     */
+    private boolean isVoxelOnShell(int x, int y, int z, double radius, int thickness) {
+        // 3D distance calculation using squared values for performance
+        double distanceSquared = x * x + y * y + z * z;
+        double radiusSquared = radius * radius;
 
-    // Getter für den StorageManager
+        if (thickness >= radius) { // Filled sphere
+            return distanceSquared <= radiusSquared;
+        } else { // Hollow sphere
+            double innerRadius = radius - thickness;
+            double innerRadiusSquared = innerRadius * innerRadius;
+            return distanceSquared <= radiusSquared && distanceSquared >= innerRadiusSquared;
+        }
+    }
+
+    // --- Getters for the StorageManager ---
     public World getWorld() { return world; }
     public double getCenterX() { return centerX; }
     public double getCenterY() { return centerY; }

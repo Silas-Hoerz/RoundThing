@@ -1,3 +1,11 @@
+/**
+ * The main class of the RoundThing plugin. It handles plugin startup and shutdown,
+ * manages player data, schedules particle rendering tasks, and registers all commands
+ * and event listeners. It also provides compatibility for both Paper and Folia servers.
+ *
+ * @author Silas Hörz
+ * @version 1.0
+ */
 package de.roundthing;
 
 import io.papermc.paper.threadedregions.scheduler.ScheduledTask;
@@ -8,7 +16,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitTask; // WICHTIGER IMPORT
+import org.bukkit.scheduler.BukkitTask;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,11 +26,12 @@ import java.util.concurrent.ConcurrentHashMap;
 public class RoundThing extends JavaPlugin implements Listener {
 
     private int particleLimit;
-    private boolean isFolia = false;
-
-    // KORREKTUR: Die Variable muss vom Typ "Object" sein, um beide Task-Typen zu halten.
+    private boolean isFoliaServer = false;
     private Object particleTask = null;
 
+    /**
+     * A container class to hold all shapes for a single player.
+     */
     public static class PlayerShapes {
         public final Map<String, ParticleCircle> circles = new HashMap<>();
         public final Map<String, ParticleSphere> spheres = new HashMap<>();
@@ -35,13 +44,14 @@ public class RoundThing extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
+        // Check if the server is running Folia by looking for a Folia-specific class
         try {
             Class.forName("io.papermc.paper.threadedregions.scheduler.GlobalRegionScheduler");
-            this.isFolia = true;
-            getLogger().info("Folia-Server erkannt. Nutze den GlobalRegionScheduler.");
+            this.isFoliaServer = true;
+            getLogger().info("Folia server detected. Using GlobalRegionScheduler.");
         } catch (ClassNotFoundException e) {
-            this.isFolia = false;
-            getLogger().info("Paper/Spigot-Server erkannt. Nutze den BukkitScheduler.");
+            this.isFoliaServer = false;
+            getLogger().info("Paper/Spigot server detected. Using BukkitScheduler.");
         }
 
         saveDefaultConfig();
@@ -63,10 +73,12 @@ public class RoundThing extends JavaPlugin implements Listener {
 
         Bukkit.getPluginManager().registerEvents(this, this);
 
+        // Load data for any players who are already online (e.g., after a /reload)
         for (Player player : Bukkit.getOnlinePlayers()) {
             loadPlayerData(player.getUniqueId());
         }
 
+        // This is the main task that draws all particles for all shapes
         Runnable particleRunnable = () -> {
             for (PlayerShapes shapes : allPlayerShapes.values()) {
                 for (ParticleCircle circle : shapes.circles.values()) circle.draw();
@@ -74,34 +86,34 @@ public class RoundThing extends JavaPlugin implements Listener {
             }
         };
 
-        if (isFolia) {
-            // KORREKTUR: Der Task wird korrekt der "Object"-Variable zugewiesen.
+        // Start the correct scheduler based on the server type
+        if (isFoliaServer) {
             this.particleTask = Bukkit.getGlobalRegionScheduler().runAtFixedRate(this, (task) -> particleRunnable.run(), 20L, 10L);
         } else {
-            // KORREKTUR: Der Task wird korrekt der "Object"-Variable zugewiesen.
             this.particleTask = Bukkit.getScheduler().runTaskTimerAsynchronously(this, particleRunnable, 20L, 10L);
         }
 
-        getLogger().info("RoundThing wurde aktiviert.");
+        getLogger().info("RoundThing has been enabled.");
     }
 
     @Override
     public void onDisable() {
+        // Cancel the correct scheduler task based on its type
         if (this.particleTask != null) {
-            // KORREKTUR: Wir prüfen den Typ und casten ihn korrekt, um cancel() aufzurufen.
-            if (isFolia && this.particleTask instanceof ScheduledTask) {
+            if (isFoliaServer && this.particleTask instanceof ScheduledTask) {
                 ((ScheduledTask) this.particleTask).cancel();
-            } else if (!isFolia && this.particleTask instanceof BukkitTask) {
+            } else if (!isFoliaServer && this.particleTask instanceof BukkitTask) {
                 ((BukkitTask) this.particleTask).cancel();
             }
         }
 
-        for (UUID uuid : allPlayerShapes.keySet()) savePlayerData(uuid);
+        for (UUID uuid : allPlayerShapes.keySet()) {
+            savePlayerData(uuid);
+        }
         allPlayerShapes.clear();
-        getLogger().info("RoundThing wurde deaktiviert.");
+        getLogger().info("RoundThing has been disabled.");
     }
 
-    // --- Der Rest der Klasse ist unverändert ---
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         loadPlayerData(event.getPlayer().getUniqueId());
@@ -128,7 +140,7 @@ public class RoundThing extends JavaPlugin implements Listener {
         shapes.currentParticleCount = totalParticles;
 
         allPlayerShapes.put(uuid, shapes);
-        getLogger().info("Daten für Spieler " + uuid + " geladen (" + totalParticles + " Partikel).");
+        getLogger().info("Loaded data for player " + uuid + " (" + totalParticles + " particles).");
     }
 
     public void savePlayerData(UUID uuid) {
@@ -136,7 +148,7 @@ public class RoundThing extends JavaPlugin implements Listener {
         if (shapes != null) {
             storageManager.savePlayerCircles(uuid, shapes.circles);
             storageManager.savePlayerSpheres(uuid, shapes.spheres);
-            getLogger().info("Daten für Spieler " + uuid + " gespeichert.");
+            getLogger().info("Saved data for player " + uuid + ".");
         }
     }
 

@@ -1,4 +1,10 @@
-# English Language File for ParticleShapes
+# =============================================================
+# = English Language File for the RoundThing (PerfectShapes) Plugin =
+# =============================================================
+# All messages sent by the plugin can be customized here.
+# Minecraft color codes using '&' are supported.
+# Placeholders like %name% must not be changed.
+# =============================================================
 
 # General Errors
 command_from_console: "&cThis command can only be run by a player."
@@ -38,6 +44,7 @@ sphere_not_found: "&cCould not find a sphere with that name!"
 sphere_list_header: "&6--- Your Spheres ---"
 sphere_list_empty: "&eYou haven't created any spheres yet."
 
+# Budget Message
 budget_exceeded: "&cParticle limit exceeded! New shape (%new%) + current (%current%) would exceed your limit of %limit%."
 
 # Admin Command Messages

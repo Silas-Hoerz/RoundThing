@@ -1,4 +1,10 @@
-# Deutsche Sprachdatei für ParticleShapes
+# ===============================================================
+# = Deutsche Sprachdatei für das RoundThing (PerfectShapes) Plugin =
+# ===============================================================
+# Hier können alle Nachrichten des Plugins angepasst werden.
+# Minecraft-Farbcodes mit '&' werden unterstützt.
+# Platzhalter wie %name% dürfen nicht verändert werden.
+# ===============================================================
 
 # Allgemeine Fehler
 command_from_console: "&cDieser Befehl kann nur von einem Spieler ausgeführt werden."
@@ -38,6 +44,7 @@ sphere_not_found: "&cEine Kugel mit diesem Namen wurde nicht gefunden!"
 sphere_list_header: "&6--- Deine Kugeln ---"
 sphere_list_empty: "&eDu hast noch keine Kugeln erstellt."
 
+# Budget-Nachricht
 budget_exceeded: "&cPartikel-Limit überschritten! Neue Form (%new%) + aktuell (%current%) würde dein Limit von %limit% sprengen."
 
 # Admin-Befehl Nachrichten

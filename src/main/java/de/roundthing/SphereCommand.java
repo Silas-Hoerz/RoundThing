@@ -1,3 +1,10 @@
+/**
+ * Handles player commands related to creating, deleting, and managing particle spheres.
+ * It processes the '/s' or '/sphere' command and its sub-commands.
+ *
+ * @author Silas Hörz
+ * @version 1.0
+ */
 package de.roundthing;
 
 import org.bukkit.ChatColor;
@@ -15,7 +22,7 @@ import java.util.UUID;
 public class SphereCommand implements CommandExecutor {
 
     private final RoundThing plugin;
-    private final CircleCommand circleCommand;
+    private final CircleCommand circleCommand; // Reused for its color map utility
     private final LocaleManager localeManager;
 
     public SphereCommand(RoundThing plugin, CircleCommand circleCommand, LocaleManager localeManager) {
@@ -32,7 +39,7 @@ public class SphereCommand implements CommandExecutor {
         }
         Player player = (Player) sender;
         if (args.length == 0) {
-            sendeHilfe(player);
+            sendHelpMessage(player);
             return true;
         }
 
@@ -40,64 +47,63 @@ public class SphereCommand implements CommandExecutor {
             case "create": handleCreate(player, args); break;
             case "delete": handleDelete(player, args); break;
             case "list": handleList(player); break;
-            case "help": default: sendeHilfe(player); break;
+            case "help": default: sendHelpMessage(player); break;
         }
         return true;
     }
 
     private void handleCreate(Player player, String[] args) {
         if (args.length < 3) {
-            sendeHilfe(player);
+            sendHelpMessage(player);
             return;
         }
         try {
             String name = args[1];
-            double durchmesser = Double.parseDouble(args[2]);
+            double diameter = Double.parseDouble(args[2]);
             UUID uuid = player.getUniqueId();
-            Location mittelpunkt = player.getLocation();
-            int dicke = 1;
-            Color farbe = Color.LIME;
+            Location center = player.getLocation();
+            int thickness = 1;
+            Color color = Color.LIME;
             int currentIndex = 3;
 
             if (args.length > currentIndex && isNumeric(args[currentIndex])) {
-                dicke = Integer.parseInt(args[currentIndex++]);
+                thickness = Integer.parseInt(args[currentIndex++]);
             }
             if (args.length > currentIndex + 2 && isNumeric(args[currentIndex]) && isNumeric(args[currentIndex + 1]) && isNumeric(args[currentIndex + 2])) {
-                mittelpunkt = new Location(player.getWorld(), Double.parseDouble(args[currentIndex]), Double.parseDouble(args[currentIndex + 1]), Double.parseDouble(args[currentIndex + 2]));
+                center = new Location(player.getWorld(), Double.parseDouble(args[currentIndex]), Double.parseDouble(args[currentIndex + 1]), Double.parseDouble(args[currentIndex + 2]));
                 currentIndex += 3;
             }
             if (args.length > currentIndex && !isNumeric(args[currentIndex])) {
-                farbe = circleCommand.parseFarbe(args[currentIndex++]);
-                if (farbe == null) {
+                color = circleCommand.parseColor(args[currentIndex++]);
+                if (color == null) {
                     localeManager.sendMessage(player, "invalid_color");
-                    String farbenListe = String.join(", ", circleCommand.getColorMap().keySet());
-                    localeManager.sendMessage(player, "available_colors", "%colors%", farbenListe);
+                    String availableColors = String.join(", ", circleCommand.getColorMap().keySet());
+                    localeManager.sendMessage(player, "available_colors", "%colors%", availableColors);
                     return;
                 }
             }
 
-            // --- PARTIKEL BUDGET PRÜFUNG ---
-            ParticleSphere testKugel = new ParticleSphere(mittelpunkt, durchmesser, dicke, farbe);
-            int neuePartikel = testKugel.getParticleCount();
+            // Particle Budget Check
+            ParticleSphere testSphere = new ParticleSphere(center, diameter, thickness, color);
+            int newParticleCount = testSphere.getParticleCount();
             RoundThing.PlayerShapes playerShapes = plugin.getPlayerShapes(uuid);
 
-            int altePartikel = 0;
+            int oldParticleCount = 0;
             if (playerShapes.spheres.containsKey(name)) {
-                altePartikel = playerShapes.spheres.get(name).getParticleCount();
+                oldParticleCount = playerShapes.spheres.get(name).getParticleCount();
             }
 
-            if (playerShapes.currentParticleCount - altePartikel + neuePartikel > plugin.getParticleLimit()) {
+            if (playerShapes.currentParticleCount - oldParticleCount + newParticleCount > plugin.getParticleLimit()) {
                 localeManager.sendMessage(player, "budget_exceeded",
-                        "%new%", String.valueOf(neuePartikel),
-                        "%current%", String.valueOf(playerShapes.currentParticleCount - altePartikel),
+                        "%new%", String.valueOf(newParticleCount),
+                        "%current%", String.valueOf(playerShapes.currentParticleCount - oldParticleCount),
                         "%limit%", String.valueOf(plugin.getParticleLimit())
                 );
                 return;
             }
 
-            // Alles gut -> Kugel speichern und Budget aktualisieren
-            playerShapes.spheres.put(name, testKugel);
-            playerShapes.currentParticleCount = playerShapes.currentParticleCount - altePartikel + neuePartikel;
+            playerShapes.spheres.put(name, testSphere);
+            playerShapes.currentParticleCount = playerShapes.currentParticleCount - oldParticleCount + newParticleCount;
             plugin.savePlayerData(uuid);
             localeManager.sendMessage(player, "sphere_success", "%name%", name);
 
@@ -108,7 +114,7 @@ public class SphereCommand implements CommandExecutor {
 
     private void handleDelete(Player player, String[] args) {
         if (args.length != 2) {
-            sendeHilfe(player);
+            sendHelpMessage(player);
             return;
         }
         UUID uuid = player.getUniqueId();
@@ -150,7 +156,7 @@ public class SphereCommand implements CommandExecutor {
         }
     }
 
-    private void sendeHilfe(Player player) {
+    private void sendHelpMessage(Player player) {
         localeManager.sendMessage(player, "help_header");
         localeManager.sendMessage(player, "help_create_sphere");
         localeManager.sendMessage(player, "help_create_desc");
@@ -165,6 +171,7 @@ public class SphereCommand implements CommandExecutor {
     }
 
     private boolean isNumeric(String str) {
+        if (str == null) return false;
         try {
             Double.parseDouble(str);
             return true;
