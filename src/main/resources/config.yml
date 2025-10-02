@@ -1,0 +1,5 @@
+# Konfiguration für das ParticleShapes Plugin
+
+# Das maximale Partikel-Budget, das jeder Spieler insgesamt nutzen darf.
+# Server-Operatoren können dies im Spiel mit /shapeadmin setlimit <Anzahl> ändern.
+particle-limit: 10000

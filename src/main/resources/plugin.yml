@@ -1,0 +1,33 @@
+name: RoundThing
+version: 1.0
+main: de.roundthing.RoundThing
+api-version: '1.21'
+folia-supported: true
+author: DeinName
+
+commands:
+  c:
+    description: Verwaltet Partikel-Kreise.
+    aliases: [circle]
+    usage: /c <help|create|delete|list>
+    permission: roundthing.use
+  s:
+    description: Verwaltet Partikel-Kugeln.
+    aliases: [sphere]
+    usage: /s <help|create|delete|list>
+    permission: roundthing.sphere.use
+  roundthing: # <<< HIER GEÄNDERT
+    description: Administriert das ParticleShapes Plugin.
+    permission: roundthing.admin
+    usage: /roundthing <setlimit|reload>
+
+permissions:
+  roundthing.use:
+    description: Erlaubt die Nutzung der Partikel-Kreise.
+    default: true
+  roundthing.sphere.use:
+    description: Erlaubt die Nutzung der Partikel-Kugeln.
+    default: true
+  roundthing.admin:
+    description: Erlaubt administrative Befehle für das Plugin.
+    default: op

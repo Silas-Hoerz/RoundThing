@@ -1,0 +1,56 @@
+# English Language File for ParticleShapes
+
+# General Errors
+command_from_console: "&cThis command can only be run by a player."
+invalid_color: "&cInvalid color! Please choose one from the list."
+available_colors: "&eAvailable: &f%colors%"
+invalid_number: "&cError in input. Thickness, coordinates, etc. must be valid numbers!"
+rotation_out_of_bounds: "&cError: Rotation angles must be between -90 and 90 degrees!"
+
+# Help Message
+help_header: "&6========== Particle Shapes Help =========="
+help_create_circle: "&b/c create <Name> <Diameter> [Options...]"
+help_create_sphere: "&b/s create <Name> <Diameter> [Options...]"
+help_create_desc: "&7Creates/modifies a shape. Use TAB for suggestions."
+help_options_circle: "&eOptional Order: &f[Thickness] [x y z] [Color] [rotX] [rotZ]"
+help_options_sphere: "&eOptional Order: &f[Thickness] [x y z] [Color]"
+help_delete: "&b/c delete <Name|all> &7(or /s)"
+help_delete_desc: "&7Deletes one or all of your shapes."
+help_list: "&b/c list &7(or /s)"
+help_list_desc: "&7Shows all your created shapes."
+help_help: "&b/c help &7(or /s)"
+help_help_desc: "&7Shows this help message."
+help_footer: "&6========================================"
+
+# Circle Messages
+circle_success: "&aCircle '%name%' was successfully created/updated!"
+circle_deleted: "&aCircle '%name%' was deleted."
+circle_deleted_all: "&aAll your circles were deleted."
+circle_not_found: "&cCould not find a circle with that name!"
+circle_list_header: "&6--- Your Circles ---"
+circle_list_empty: "&eYou haven't created any circles yet."
+
+# Sphere Messages
+sphere_success: "&aSphere '%name%' was successfully created/updated!"
+sphere_deleted: "&aSphere '%name%' was deleted."
+sphere_deleted_all: "&aAll your spheres were deleted."
+sphere_not_found: "&cCould not find a sphere with that name!"
+sphere_list_header: "&6--- Your Spheres ---"
+sphere_list_empty: "&eYou haven't created any spheres yet."
+
+budget_exceeded: "&cParticle limit exceeded! New shape (%new%) + current (%current%) would exceed your limit of %limit%."
+
+# Admin Command Messages
+admin_no_permission: "&cYou do not have permission to use this command."
+admin_help_header: "&6--- RoundThing Admin Help ---"
+admin_help_setlimit: "&b/roundthing setlimit <amount>"
+admin_help_reload: "&b/roundthing reload"
+admin_usage_setlimit: "&cUsage: /roundthing setlimit <amount>"
+admin_limit_negative: "&cThe limit cannot be negative."
+admin_limit_set: "&aParticle limit has been set to %limit%."
+admin_guidelines_header: "&7--- Guidelines ---"
+admin_guideline_circle: "&7A circle with 50 block diameter has ~157 particles."
+admin_guideline_sphere: "&7A sphere with 50 block diameter has ~4100 particles."
+admin_guideline_info: "&eA limit of 10,000 allows for ~2 large spheres per player."
+admin_reload_success: "&aConfiguration reloaded. New limit: %limit%"
+admin_unknown_command: "&cUnknown command. Use /roundthing for help."
