@@ -6,9 +6,12 @@
 
 **Never build ugly circles again! RoundThing is a Minecraft (Paper/Folia) plugin that visualizes perfect, block-snapped circles, spheres, and rings with particles as the ultimate building guide.**
 
+![1.png](images/1.png)
+
 This plugin is your personal architect for all circular construction projects. It helps players visualize mathematically perfect shapes by displaying a grid of particles exactly where blocks need to be placed. The result is flawless structures without the headache.
 
-![Consider inserting a screenshot or GIF of the plugin in action here!]
+![3.png](images/3.png)
+
 
 ---
 
@@ -16,6 +19,7 @@ This plugin is your personal architect for all circular construction projects. I
 
 - **Two Shape Types:** Create detailed **Circles** and **Spheres**.
 - **Block-Perfect:** Particles always snap to the center of a block, creating a clear "stair-step effect" as a perfect building template.
+![2.png](images/2.png)
 - **Full 3D Control:** Freely rotate circles in 3D space! Tilt them on the X and Z axes (`-90°` to `+90°`) to create vertical rings, diagonal platforms, and more.
 - **Thickness & Filling:** Create thick rings or completely filled disks and spheres.
 - **Persistent Storage:** Every shape created by a player is saved and survives a server restart.
@@ -23,6 +27,8 @@ This plugin is your personal architect for all circular construction projects. I
 - **Fully Configurable:** Admins can adjust the limit at any time in-game or in the `config.yml`.
 - **Multilingual (i18n):** Automatically adapts to the player's client language. (Supports English, German, Spanish, French, Chinese, Russian, and many more out of the box).
 - **Intelligent Commands:** Thanks to tab-completion, commands, shape names, colors, and coordinates are suggested as you type.
+
+
 
 ---
 
