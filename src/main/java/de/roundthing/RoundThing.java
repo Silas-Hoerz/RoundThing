@@ -35,6 +35,7 @@ public class RoundThing extends JavaPlugin implements Listener {
     public static class PlayerShapes {
         public final Map<String, ParticleCircle> circles = new HashMap<>();
         public final Map<String, ParticleSphere> spheres = new HashMap<>();
+        public final Map<String, ParticleLine> lines = new HashMap<>(); // ADDED: For lines
         public int currentParticleCount = 0;
     }
 
@@ -60,14 +61,19 @@ public class RoundThing extends JavaPlugin implements Listener {
         this.storageManager = new StorageManager(this);
         this.localeManager = new LocaleManager(this);
 
+        // Command initializations
         CircleCommand circleCommand = new CircleCommand(this, localeManager);
         SphereCommand sphereCommand = new SphereCommand(this, circleCommand, localeManager);
+        LineCommand lineCommand = new LineCommand(this, circleCommand, localeManager); // ADDED: Line command
         AdminCommand adminCommand = new AdminCommand(this);
 
+        // Command Registrations
         getCommand("c").setExecutor(circleCommand);
         getCommand("c").setTabCompleter(new CircleTabCompleter(this, circleCommand));
         getCommand("s").setExecutor(sphereCommand);
         getCommand("s").setTabCompleter(new SphereTabCompleter(this, circleCommand));
+        getCommand("l").setExecutor(lineCommand); // ADDED: Register line command
+        getCommand("l").setTabCompleter(new LineTabCompleter(this, circleCommand)); // ADDED: Register line tab completer
         getCommand("roundthing").setExecutor(adminCommand);
         getCommand("roundthing").setTabCompleter(new AdminTabCompleter());
 
@@ -83,6 +89,7 @@ public class RoundThing extends JavaPlugin implements Listener {
             for (PlayerShapes shapes : allPlayerShapes.values()) {
                 for (ParticleCircle circle : shapes.circles.values()) circle.draw();
                 for (ParticleSphere sphere : shapes.spheres.values()) sphere.draw();
+                for (ParticleLine line : shapes.lines.values()) line.draw(); // ADDED: Draw lines
             }
         };
 
@@ -126,17 +133,14 @@ public class RoundThing extends JavaPlugin implements Listener {
     }
 
     public void loadPlayerData(UUID uuid) {
-        PlayerShapes shapes = new PlayerShapes();
-        shapes.circles.putAll(storageManager.loadPlayerCircles(uuid));
-        shapes.spheres.putAll(storageManager.loadPlayerSpheres(uuid));
+        // UPDATED: Now loads all shape types
+        PlayerShapes shapes = storageManager.loadPlayerShapes(uuid);
 
+        // Recalculate the initial particle budget including all shape types
         int totalParticles = 0;
-        for (ParticleCircle circle : shapes.circles.values()) {
-            totalParticles += circle.getParticleCount();
-        }
-        for (ParticleSphere sphere : shapes.spheres.values()) {
-            totalParticles += sphere.getParticleCount();
-        }
+        for (ParticleCircle circle : shapes.circles.values()) totalParticles += circle.getParticleCount();
+        for (ParticleSphere sphere : shapes.spheres.values()) totalParticles += sphere.getParticleCount();
+        for (ParticleLine line : shapes.lines.values()) totalParticles += line.getParticleCount(); // ADDED: Count line particles
         shapes.currentParticleCount = totalParticles;
 
         allPlayerShapes.put(uuid, shapes);
@@ -146,8 +150,8 @@ public class RoundThing extends JavaPlugin implements Listener {
     public void savePlayerData(UUID uuid) {
         PlayerShapes shapes = allPlayerShapes.get(uuid);
         if (shapes != null) {
-            storageManager.savePlayerCircles(uuid, shapes.circles);
-            storageManager.savePlayerSpheres(uuid, shapes.spheres);
+            // UPDATED: Saves all shapes at once
+            storageManager.savePlayerShapes(uuid, shapes);
             getLogger().info("Saved data for player " + uuid + ".");
         }
     }
@@ -160,6 +164,8 @@ public class RoundThing extends JavaPlugin implements Listener {
     public int getParticleLimit() {
         return this.particleLimit;
     }
+
+
 
     public void setParticleLimit(int limit) {
         this.particleLimit = limit;
@@ -175,6 +181,11 @@ public class RoundThing extends JavaPlugin implements Listener {
 
     public Map<String, ParticleSphere> getPlayerSpheres(UUID uuid) {
         return getPlayerShapes(uuid).spheres;
+    }
+
+    // ADDED: Getter for lines
+    public Map<String, ParticleLine> getPlayerLines(UUID uuid) {
+        return getPlayerShapes(uuid).lines;
     }
 
     public LocaleManager getLocaleManager() {

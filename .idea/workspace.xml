@@ -5,14 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f6ccd2e7-cc7f-428e-aeaf-de87ef8edf55" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/images/1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/3.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/de/roundthing/LineCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/de/roundthing/LineTabCompleter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/de/roundthing/ParticleLine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/roundthing/RoundThing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/roundthing/RoundThing.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/roundthing/StorageManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/roundthing/StorageManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/lang/de_DE.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/lang/de_DE.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/lang/en_US.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/lang/en_US.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/lang/es_ES.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/lang/es_ES.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/lang/fr_FR.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/lang/fr_FR.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/lang/ja_JP.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/lang/ja_JP.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/lang/ko_KR.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/lang/ko_KR.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/lang/pl_PL.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/lang/pl_PL.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/lang/pt_BR.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/lang/pt_BR.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/lang/ru_RU.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/lang/ru_RU.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/lang/zh_CN.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/lang/zh_CN.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,22 +48,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Maven.RoundThing [package].executor": "Run",
-    "Maven.round_thing [package].executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/silas/IdeaProjects/round_thing/round_thing/src/main/resources/lang",
-    "onboarding.tips.debug.path": "C:/Users/silas/IdeaProjects/round_thing/round_thing/images/src/main/java/de/roundthing/Main.java",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Maven.RoundThing [package].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.round_thing [package].executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/silas/IdeaProjects/round_thing/round_thing/src/main/resources/lang&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/silas/IdeaProjects/round_thing/round_thing/images/src/main/java/de/roundthing/Main.java&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\silas\IdeaProjects\round_thing\round_thing\src\main\resources\lang" />
@@ -90,6 +101,16 @@
           <url>file://$PROJECT_DIR$/images/src/main/java/de/roundthing/Main.java</url>
           <line>13</line>
           <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/de/roundthing/ParticleCircle.java</url>
+          <line>73</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/de/roundthing/ParticleCircle.java</url>
+          <line>30</line>
+          <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/de/roundthing/CircleCommand.java</url>

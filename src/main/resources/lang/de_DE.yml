@@ -13,20 +13,29 @@ available_colors: "&eVerfügbar: &f%colors%"
 invalid_number: "&cFehler in der Eingabe. Dicke, Koordinaten etc. müssen gültige Zahlen sein!"
 rotation_out_of_bounds: "&cFehler: Die Rotationswinkel müssen zwischen -90 und 90 Grad liegen!"
 
-# Hilfe-Nachricht
+# Help Message
 help_header: "&6========== Partikel Formen Hilfe =========="
 help_create_circle: "&b/c create <Name> <Durchmesser> [Optionen...]"
 help_create_sphere: "&b/s create <Name> <Durchmesser> [Optionen...]"
+help_create_line: "&b/l create <Name> <x1> <y1> <z1> <x2> <y2> <z2> [Farbe]"
 help_create_desc: "&7Erstellt/ändert eine Form. Benutze TAB für Vorschläge."
-help_options_circle: "&eOptionale Reihenfolge: &f[Dicke] [x y z] [Farbe] [rotX] [rotZ]"
-help_options_sphere: "&eOptionale Reihenfolge: &f[Dicke] [x y z] [Farbe]"
-help_delete: "&b/c delete <Name|all> &7(oder /s)"
+help_options_circle: "&eKreis-Optionen: &f[Dicke] [x y z] [Farbe] [rotX] [rotZ]"
+help_options_sphere: "&eKugel-Optionen: &f[Dicke] [x y z] [Farbe]"
+help_delete: "&b/c delete <Name|all> &7(auch für /s, /l)"
 help_delete_desc: "&7Löscht eine oder alle deine Formen."
-help_list: "&b/c list &7(oder /s)"
+help_list: "&b/c list &7(auch für /s, /l)"
 help_list_desc: "&7Zeigt alle deine erstellten Formen an."
-help_help: "&b/c help &7(oder /s)"
+help_help: "&b/c help &7(auch für /s, /l)"
 help_help_desc: "&7Zeigt diese Hilfe-Nachricht an."
 help_footer: "&6========================================"
+
+# Line Messages
+line_success: "&aLinie '%name%' wurde erfolgreich erstellt/aktualisiert!"
+line_deleted: "&aLinie '%name%' wurde gelöscht."
+line_deleted_all: "&aAlle deine Linien wurden gelöscht."
+line_not_found: "&cEine Linie mit diesem Namen wurde nicht gefunden!"
+line_list_header: "&6--- Deine Linien ---"
+line_list_empty: "&eDu hast noch keine Linien erstellt."
 
 # Kreis-Nachrichten
 circle_success: "&aKreis '%name%' wurde erfolgreich erstellt/aktualisiert!"
