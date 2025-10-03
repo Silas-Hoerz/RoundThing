@@ -1,6 +1,6 @@
 # RoundThing
 ![Java](https://img.shields.io/badge/Java-17-blue)
-![API](https://img.shields.io/badge/API-Paper%20/%20Folia%201.20%2B-orange)
+![API](https://img.shields.io/badge/API-Paper%20/%20Folia%201.21.8%2B-orange)
 ![License](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey)
 
 **Never build ugly circles again! RoundThing is a Minecraft (Paper/Folia) plugin that visualizes perfect, block-snapped circles, spheres, and lines with particles as the ultimate building guide.**
