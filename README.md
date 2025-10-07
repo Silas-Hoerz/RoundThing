@@ -26,7 +26,7 @@ This plugin is your personal architect for all complex construction projects. It
 
 ## 📦 Installation
 
-1.  Download the latest `.jar` file from the [Releases Tab](https://github.com/YOUR_USERNAME/YOUR_REPO/releases).
+1.  Download the latest `.jar` file from the [Releases Tab](https://github.com/Silas-Hoerz/RoundThing/releases).
 2.  Place the `.jar` file into the `plugins` folder of your Paper/Folia server.
 3.  Restart the server.
 
